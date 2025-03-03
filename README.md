@@ -1,4 +1,4 @@
-# Koral Reef
+# Koral Reef 🪸
 
 A Ruby gem that scrapes images from websites (including JavaScript-heavy ones) and compiles them into a PDF.
 
