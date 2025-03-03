@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "koralreef"
+require "optparse"
+
+options = {
+  headless: true,
+  output: "scraped_images.pdf",
+  selector: "img"
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: koralreef [options] URL"
+
+  opts.on("-s", "--selector SELECTOR", "CSS selector for images (default: img)") do |s|
+    options[:selector] = s
+  end
+
+  opts.on("-o", "--output FILE", "Output PDF file (default: scraped_images.pdf)") do |o|
+    options[:output] = o
+  end
+
+  opts.on("--[no-]headless", "Run in headless mode (default: true)") do |h|
+    options[:headless] = h
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!
+
+if ARGV.empty?
+  puts "ERROR: URL is required"
+  puts parser
+  exit 1
+end
+
+url = ARGV[0]
+
+begin
+  pdf_file = Koralreef.run(
+    url: url,
+    selector: options[:selector],
+    output_file: options[:output],
+    headless: options[:headless]
+  )
+
+  puts "PDF created successfully: #{pdf_file}"
+rescue Koralreef::Error => e
+  puts "ERROR: #{e.message}"
+  exit 1
+end
