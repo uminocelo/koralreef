@@ -4,7 +4,7 @@ require_relative 'lib/koralreef/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'koralreef'
-  spec.version = ImageScraperPdf::VERSION
+  spec.version = Koralreef::VERSION
   spec.authors = ['Celo']
   spec.email = ['marcelo.mdl.dev@gmail.com']
   spec.summary = 'A tool to scrape images from websites and compile them into a PDF'
